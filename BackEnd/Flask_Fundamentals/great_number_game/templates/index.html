@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Number Game</title>
+  </head>
+  <body>
+    <h1>Welcome to the Great Number Game!</h1>
+    <p>I am thinking of a number between 1 and 100</p>
+    <p>Take a guess!</p>
+    <form action="/winner" method="post">
+      <input type="text" name="random_guess" placeholder="guess_number">
+      <input type="submit" name="submit_btn" value="submit">
+    </form>
+    <p>{{session.str}}</p>
+  </body>
+</html>

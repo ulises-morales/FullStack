@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Form Test Index</title>
+	</head>
+	<body>
+		<form action='/result' method='post'>
+			Your Name: <input type='text' name='Name'><br>
+			Dojo Location:   
+			<select name="Dojos">
+				<option value="sanjose">San Jose</option>
+				<option value="chicago">Chicago</option>
+				<option value="newyork">New York</option>
+				<option value="houston">Houston</option>
+			</select><br>
+			Favorite Language:
+			<select name="Language">
+				<option value="python">Python</option>
+				<option value="ruby">Ruby</option>
+				<option value="php">Php</option>
+				<option value="javascript">Java Script</option>
+			</select><br>
+			Comment (optional)<br>
+			<textarea name="Comment"></textarea><br>
+			<input type='submit' value='Submit'>
+		</form>
+	</body>
+</html>

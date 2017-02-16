@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Results</title>
+	</head>
+	<body>
+		<div class="main">
+			<table>
+				{% for key, value in result.iteritems() %}
+
+				<tr>
+					<th> {{ key }} </th>
+					<td> {{ value }} </td>
+				</tr>
+
+				{% endfor %}
+			</table>
+			<form>
+				<input type="submit" name="submit" value="Go Back">
+			</form>
+		</div>
+	</body>
+</html>
