@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'timedisplay/css/styles.css' %}" media="screen" title="no title" charset="utf-8">
+	<title>Current Time</title>
+	</head>
+	<body>
+		<div class="container">
+			<h1>The current time is</h1>
+			<div class="line"><span class="text html basic"><span>{{somekey}}</span></span></div>
+		</div>
+	</body>
+</html>

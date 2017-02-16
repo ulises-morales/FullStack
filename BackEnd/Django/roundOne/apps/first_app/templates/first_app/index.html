@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<!-- This line tells Django to be ready to listen for static files -->
+		{% load staticfiles %}
+		<link rel="stylesheet" type="text/css" href="{% static 'first_app/css/styles.css' %}"media="screen" title="no title" charset="utf-8">
+		<title>App One</title>
+	</head>
+	<body>
+		{{request.session.name}}
+		<h1>Hello World!</h1>
+		<form action="/new_user" method="post">
+			{% csrf_token %}
+			<input type="text" name="first_name">
+			<input type="submit" value="submit">
+		</form>
+	</body>
+</html>
