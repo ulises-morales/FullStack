@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'first_app/css/styles.css' %}"media="screen" title="no title" charset="utf-8">
+        <title>Survey Form</title>
+    </head>
+    <body>
+        <div class="container">
+            <form action="/new_user", method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="InputName1">Your Name:</label>
+                    <input type="text" class="form-control" id="InputName1" placeholder="Enter your Name" name="username">
+                </div>
+                <div class="form-group">
+                    <label for="Seleclocation">Dojo Location:</label>
+                    <select class="form-control" name="userlocation">
+                        <option>Silicon Valley</option>
+                        <option>Seattle</option>
+                        <option>Los Angeles</option>
+                        <option>Dallas</option>
+                        <option>Washington DC</option>
+                        <option>Chicago</option>
+                        <option>Berkeley</option>
+                        <option>Orange County</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Seleclanguage">Favorite Language:</label>
+                    <select class="form-control" name="userlanguage">
+                        <option>JavaScript</option>
+                        <option>Python</option>
+                        <option>Ruby</option>
+                        <option>iOS</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="comment">Leave a comment:</label>
+                    <textarea class="form-control" rows="3" name="usercomment"></textarea>
+                </div>
+                <input type="submit" class="btn btn-primary" name="formsubmit" value="Submit">
+            </form>
+        </div>
+    </body>
+</html>
