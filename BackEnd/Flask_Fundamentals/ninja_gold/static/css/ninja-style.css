@@ -1,0 +1,52 @@
+.container {
+  padding: 20px;
+}
+
+.form-container{
+  display: block;
+  background-color: #9dc0f2;
+  width: 1000px;
+  text-align: center;
+  margin-top: 15px;
+}
+.farm{
+  display: inline-block;
+  background-color: #bbcee8;
+  width: 200px;
+  height: 200px;
+}
+.cave{
+  display: inline-block;
+  background-color: #bbcee8;
+  width: 200px;
+  height: 200px;
+}
+.house{
+  display: inline-block;
+  background-color: #bbcee8;
+  width: 200px;
+  height: 200px;
+}
+.casino{
+  display: inline-block;
+  background-color: #bbcee8;
+  width: 200px;
+  height: 200px;
+}
+.boxes{
+  margin: 10px;
+}
+.activities{
+  width: 1000px;
+  background-color: #dee1e5;
+}
+.activities-container{
+  margin-top: 25px;
+  display: block;
+}
+.green{
+  color: green;
+}
+.red{
+  color: red;
+}
