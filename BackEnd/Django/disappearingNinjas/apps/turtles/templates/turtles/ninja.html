@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'first_app/css/styles.css' %}"media="screen" charset="utf-8">
+        <title>Ninja Turtles</title>
+    </head>
+    <body>
+        <h1>{{nameT_name}}</h1>
+        {% if ninjaT_name == "all" %}
+        <img src="{% static 'turtles/images/all.png' %}" />
+        {% elif ninjaT_name == "blue" %}
+        <img src="{% static 'turtles/images/nt-blue.png' %}" />
+        {% elif ninjaT_name == "purple" %}
+        <img src="{% static 'turtles/images/nt-purple.png' %}" />
+        {% elif ninjaT_name == "red" %}
+        <img src="{% static 'turtles/images/nt-red.jpg' %}" />
+        {% elif ninjaT_name == "orange" %}
+        <img src="{% static 'turtles/images/nt-orange.png' %}" />
+        {% else %}
+        <img src="{% static 'turtles/images/noturtle.png' %}" />
+        {% endif %}
+    </body>
+</html>
