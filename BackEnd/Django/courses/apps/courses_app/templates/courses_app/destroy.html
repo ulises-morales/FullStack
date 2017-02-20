@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% load staticfiles %}
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="{% static 'first_app/css/styles.css' %}"media="screen" title="no title" charset="utf-8">
+		<title>Drop courses</title>
+	</head>
+	<body>
+		<div class="container">
+			<h3>Are you sure you want to delete the following course?</h3>
+			<table>
+				<tr>
+					<td><h4>Name:</h4></td>
+					<td class="courses_">{{course.course_name}}</td>
+				</tr>
+				<tr>
+					<td><h4>Description:</h4></td>
+					<td class="courses_">{{course.description}}</td>
+				</tr>
+			</table>
+			<form action="{% url 'index' %}">
+                   {% csrf_token %}
+                   <input class="btn btn-default" type="submit" value ="No">
+            </form>
+
+            <form action="{% url 'deletethis' id=course.id%}" method="post">
+                    {% csrf_token %}
+                    <input class="btn btn-danger" type="submit" value ="Yes, I want to delete this">
+            </form>
+		</div>
+	</body>
+</html>
