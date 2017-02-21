@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% load staticfiles %}
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="{% static 'validation/css/styles.css' %}"media="screen" charset="utf-8">
+		<title>Validation Success</title>
+	</head>
+	<body>
+		<div class="container">
+			{% for message in messages %}
+			<div class="succesMsg">
+				<h4>{{ message }}</h4>
+			</div>
+			{% endfor %}
+
+			<table class="table">
+			  <tr>
+			      <th>Email</th>
+			      <th>Date</th>
+			      <th>Action</th>
+			  </tr>
+			  {% for email in emails %}
+			  <tr>
+			      <td>{{ email.email }}</td>
+			      <td>{{ email.created_at }}</td>
+			      <td><a href="{% url 'deleting' id=email.id %}">remove</a></td>
+			  </tr>
+			  {% endfor %}
+			</table>
+		</div>
+	</body>
+</html>
