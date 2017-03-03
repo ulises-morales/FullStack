@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% load staticfiles %}
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<meta name="dcterms.rightsHolder" content="Ulises Morales">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="{% static 'main/css/styles.css' %}" media="screen">
+		<title>Welcome</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 welcome">
+					<h1>Welcome!</h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4">
+
+					<form class="form-register" action="/register" method="POST">
+					{% csrf_token %}
+						<fieldset>
+							<div id="legend">
+								<legend class="">Register</legend>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="name">Name</label>
+								<div class="controls">
+									<input type="text" id="name" name="name" placeholder="" class="form-control input-lg">
+									<p class="help-block">Name can only contain letters without spaces</p>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label" for="alias">Alias</label>
+								<div class="controls">
+									<input type="text" id="alias" name="alias" placeholder="" class="form-control input-lg">
+									<p class="help-block">Alias can contain letters and numbers</p>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label" for="email">E-mail</label>
+								<div class="controls">
+									<input type="text" id="email" name="email" placeholder="" class="form-control input-lg">
+									<p class="help-block">Please provide your E-mail</p>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label" for="password">Password</label>
+								<div class="controls">
+									<input type="password" id="password" name="password" placeholder="" class="form-control input-lg">
+									<p class="help-block">Password should be between 8 and 16 chracters</p>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label" for="confirm_password">Password (Confirm)</label>
+								<div class="controls">
+									<input type="password" id="confirm_password" name="confirm_password" placeholder="" class="form-control input-lg">
+									<p class="help-block">Please confirm password</p>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label" for="birthdate">Date of birth</label>
+								<div class="controls">
+									<input type="text" id="birthdate" name="birthday" placeholder="mm/dd/yyyy" class="form-control input-lg">
+									<p class="help-block">Please enter your birthday</p>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<!-- Button -->
+								<div class="controls">
+									<button class="btn btn-success">Register</button>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+
+				</div> 
+
+				<div class='col-sm-3'>
+	                <div id='errors'>
+						 {% if messages %}
+						<ul>
+						{% for message in messages %}
+							<li class="{{ message.tags }}">{{ message }}</li>
+						{% endfor %}
+						</ul>
+						{% endif %}
+	                </div>
+            	</div>
+		
+				<form class="form-signin col-md-4" action="/login" method="POST"> 
+				{% csrf_token %}
+					<fieldset>
+						<div id="legend">
+							<legend class="">Login</legend>
+						</div>     
+						<input type="text" class="form-control" name="email" placeholder="Email Address" />
+						<input type="password" class="form-control" name="password" placeholder="Password"/>      
+						<button class="btn btn-lg btn-success btn-block" type="submit">Login</button>
+					</fieldset> 
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

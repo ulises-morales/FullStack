@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% load staticfiles %}
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<meta name="dcterms.rightsHolder" content="Ulises Morales">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="{% static 'main/css/styles.css' %}" media="screen">
+		<title>Dashboard</title>
+	</head>
+	<body>
+	    <div class="container">
+	        <h5 style="text-align: right"><a href="/logout">Logout</a></h5>
+	        <br>
+	        <p>Successfully logged in! Welcome, <b>{{user.name}} !</b></p>
+	        {% if messages %}
+	            <ul class="messages">
+	            {% for message in messages %}
+	            <li>{{ message }}</li>
+	            {% endfor %}
+	            </ul>
+	         {% endif %}
+	    </div>
+
+	    <div class="container">
+	        <h4>Your Friends</h4>
+	        <table>
+	            <thead>
+	            	<tr>
+						<th>Alias</th>
+						<th>Action</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	                {%if not friend%}
+	                <tr>
+	                    <td> </td>
+	                    <td>You Have No Friends</td>
+	                </tr>
+	                {%else%}
+	                    {%for friend in friend%}
+	                        {%if friend != user%}
+	                <tr>
+	                    <td>{{friend.alias}} </td>
+	                    <td><a href="/friends/{{friend.id}}">View Profile</a> | <a href="/removefriend/{{friend.id}}">Remove Friend</a></td>
+	                </tr>
+
+	                    {%endif%}
+	                {%endfor%}
+	            {%endif%}
+	            </tbody>
+	        </table>
+	    </div>
+	        <br>
+	    <div class="container">
+	        <h4>Other User's Not on Your Friend List</h4>
+	        <table>
+	            <thead>
+	                <th>Alias</th>
+	                <th>Action</th>
+	            </thead>
+	            <tbody>
+
+	                {%for friend in notfriends%}
+	                    {%if friend != user%}
+	                <tr>
+	                    <td><a href="/friends/{{friend.id}}">{{friend.alias}}</a></td>
+	                    <form class="" action="/addfriend/{{friend.id}}" method="POST">
+	                        {% csrf_token %}
+	                       <td><input type="Submit" name="add" value="Add Friend"></td>
+	                   </form>
+	                </tr>
+	                    {%endif%}
+	                {%endfor%}
+
+	            </tbody>
+	        </table>
+	        <br>
+	    </div>
+	</body>
+</html>
