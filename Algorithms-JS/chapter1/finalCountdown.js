@@ -15,32 +15,33 @@ except for the value 9).
 
 */
 
-// function finalCountdown(parm1, parm2, parm3, parm4){
-//   var count = 0;
-//   while (i >= parm2 && i <= parm3){
-//     if (i == parm4){
-//       continue;
-//     }
-//     else if (i % parm1 == 0) {
-//       console.log(i);
-//       count += i;
-//     }
-//   }
-// }
-
-// finalCountdown(3,5,17,9);
-
-
-function finalCountdown(p1,p2,p3,p4){
+function finalCountdown(parm1, parm2, parm3, parm4){
+  var multiple = 0;
   var count = 0;
-  for (var i = p2; i<=p3; i++){
-    if (i == p4){
-    continue;
+  while (count <= parm3){
+    if (multiple == parm4){
+      continue;
     }
-    else if (i % p1 == 0){
-        console.log(i);
-        count += i;
-      }
+    if (multiple <= parm2){
+      continue;
+    }
+    count += parm1;
   }
 }
+
 finalCountdown(3,5,17,9);
+
+
+// function finalCountdown(p1,p2,p3,p4){
+//   var count = 0;
+//   for (var i = p2; i<=p3; i++){
+//     if (i == p4){
+//     continue;
+//     }
+//     else if (i % p1 == 0){
+//         console.log(i);
+//         count += i;
+//       }
+//   }
+// }
+// finalCountdown(3,5,17,9);
