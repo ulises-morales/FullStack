@@ -1,0 +1,5 @@
+/*
+
+Return the average value of an array of unsorted numbers.
+
+*/
