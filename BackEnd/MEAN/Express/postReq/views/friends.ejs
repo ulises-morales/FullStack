@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Friends</title>
+  </head>
+  <body>
+    <h2>Your friends</h2>
+    <% friends_list.forEach(function(friend){ %>
+      <li><%= friend %></li>
+    <% }); %>
+    <form class="addfriend" action="/addfriend" method="post">
+      <input type="text" name="newfriend" value="Name">
+      <button type="submit">New Friend</button>
+    </form>
+  </body>
+</html>
