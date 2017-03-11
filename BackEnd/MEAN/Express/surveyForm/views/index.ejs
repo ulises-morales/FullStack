@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Form</title>
+  </head>
+  <body>
+    <div class="container">
+      <form class="form-horizontal" action="/result" method="post">
+        <div class="form-group">
+          <label for="name" class="col-sm-2 control-label">Your Name:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="dojos" class="col-sm-2 control-label">Dojo Locations:</label>
+          <div class="col-sm-4">
+            <select class="form-control" name="locations">
+              <option value="San Jose">San Jose</option>
+              <option value="Los Angeles">Los Angeles</option>
+              <option value="Seattle">Seattle</option>
+              <option value="Chicago">Chicago</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="languages" class="col-sm-2 control-label">Favorite Language:</label>
+          <div class="col-sm-4">
+            <select class="form-control" name="languages">
+              <option value="Java Script">Java Script</option>
+              <option value="Python">Python</option>
+              <option value="Ruby">Ruby</option>
+              <option value="iOS">iOS</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="comment" class="col-sm-2 control-label">Comment (optional)</label>
+          <div class="col-sm-4">
+            <textarea class="form-control" rows="3" name="comment"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </body>
+</html>
