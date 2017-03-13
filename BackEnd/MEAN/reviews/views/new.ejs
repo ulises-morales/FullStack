@@ -1,0 +1,18 @@
+<% include partials/header %>
+  <div class="col-lg-4" style="width 30%; margin: 0 auto;">
+    <h1>Create a new Camp Ground</h1>
+    <form class="newcamp" action="/campgrounds" method="post">
+      <div class="form-group">
+        <input class="form-control" type="text" name="name" placeholder="Camp Name">
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="image" placeholder="Image url">
+      </div>
+      <div class="form-group">
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="button">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <a href="/campgrounds">Back</a>
+<% include partials/footer %>
