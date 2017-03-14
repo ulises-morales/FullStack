@@ -1,0 +1,20 @@
+<% include partials/header %>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3>Dog Information</h3>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <% if (dogs){ %>
+          <h5><strong>Name:</strong> <%= dogs.name %></h5>
+          <h5><strong>Breed:</strong> <%= dogs.breed %></h5>
+          <h5><strong>Age:</strong> <%= dogs.age %></h5>
+          <% } else { %>
+          <p>No dogs Found</p>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+    <% include partials/footer %>

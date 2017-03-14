@@ -1,0 +1,36 @@
+<% include partials/header %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h4>Your Dogs</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <table class="table col-md-8">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% dogs.forEach(function(dog){ %>
+          <tr>
+            <td><a href="/dogs/<%= dog.id%>"><%= dog.name %></a></td>
+            <td>
+              <a href="/dogs/edit/<%= dog.id%>">Edit </a>
+            </td>
+            <td>
+              <form action="/dogs/destroy/<%= dog.id%>" method="post">
+                <input type="submit" class="btn btn-danger" value="Delete">
+              </form>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<% include partials/footer %>
