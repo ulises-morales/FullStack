@@ -1,16 +1,23 @@
-var express = require ("express");
-var bodyParser = require("body-parser");
-var app = express();
+const express = require ("express"),
+    bodyParser = require("body-parser"),
+    app = express();
+    mongoose = require("mongoose");
 
+// connect mongoose
+mongoose.connect("mongodb://localhost/yelp_camp");
 app.use(bodyParser.urlencoded({extended: true}));
 // set ejs
 app.set("view engine", "ejs");
 
-var campground = [
-  {name: "Salmon Creek", image: "http://images.nationalgeographic.com/wpf/media-live/photos/000/367/cache/banff-lake-morraine_36732_600x450.jpg"},
-  {name: "Granit Hill", image: ""},
-  {name: "Mount Goat's Rest", image: ""},
-]
+// SCHEMA SETUP
+let campgroundSchema = new mongoose.Schema({
+  name: String,
+  image: String,
+  description: String,
+});
+
+// compile the model
+let Campground = mongoose.model("Campground", campgroundSchema);
 
 // root route
 app.get("/", function(req, res){
@@ -19,12 +26,14 @@ app.get("/", function(req, res){
 
 // campgrounds root
 app.get("/campgrounds", function(req, res){
-  // var campground = [
-  //   {name: "Salmon Creek", image: "http://images.nationalgeographic.com/wpf/media-live/photos/000/367/cache/banff-lake-morraine_36732_600x450.jpg"},
-  //   {name: "Granit Hill", image: ""},
-  //   {name: "Mount Goat's Rest", image: ""},
-  // ]
-  res.render("campground", {campInfo: campground});
+  // get all campgrounds from db
+  Campground.find({}, function(err, allCampgrounds){
+    if(err){
+      console.log(err);
+    } else {
+      res.render("index", {campInfo: allCampgrounds});
+    }
+  });
 });
 
 // post route
@@ -32,16 +41,37 @@ app.post("/campgrounds", function(req, res){
   //get data from form and add to campground array
   var name = req.body.name;
   var image = req.body.image;
-  var newCampground = {name: name, image: image};
-  campground.push(newCampground);
-  //redirect back to campground
-  res.redirect("/campgrounds");
-  // res.send("You reached the post route");
+  var description = req.body.description;
+  var newCampground = {name: name, image: image, description: description};
+  // Create a new campground and save to db
+  Campground.create(newCampground, function(err, newlyCreated){
+    if(err){
+      console.log(err);
+    } else {
+      //redirect back to campground
+      res.redirect("/campgrounds");
+    }
+  });
 });
 
+// shows form
 app.get("/campgrounds/new", function(req, res){
   res.render("new.ejs");
 });
+
+// shows info for specific campground
+app.get("/campgrounds/:id", function(req, res){
+  // find campground with provided ID
+  Campground.findById(req.params.id, function(err, foundCampground){
+    if(err){
+      console.log("Did not find id");
+    } else {
+      // render show template with the campground
+      res.render("show", {campground: foundCampground});
+    }
+  });
+});
+
 
 
 // Listening in port 80000

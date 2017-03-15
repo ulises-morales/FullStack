@@ -1,0 +1,29 @@
+<% include partials/header %>
+<div class="row">
+<form class="" action="/posts" method="post">
+  <div class="control-group col-md-4">
+		<label class="control-label" for="name">Name</label>
+		<div class="controls">
+			<input type="text" id="name" name="name" placeholder="" class="form-control input-lg">
+		</div>
+	</div>
+  <div class="control-group col-md-10">
+    <label class="control-label" for="message">Message</label>
+      <div class="controls">
+        <textarea class="form-control" rows="3" name="message"></textarea>
+      </div>
+  </div>
+
+  <div class="form-group col-md-3">
+    <button class="btn btn-lg btn-success btn-block" type="submit">Post Message</button>
+  </div>
+</form>
+
+<div class="display_posts">
+  <% if (posts){%>
+    <% posts.forEach(function(post){)%>
+      <h4>Name: <%= post.name %></h4>
+      <h4>Message: <%= post.message %></h4>
+</div>
+</div>
+<% include partials/footer %>
