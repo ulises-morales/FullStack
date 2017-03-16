@@ -19,7 +19,7 @@ var mongoose = require('mongoose');
 // Use native promises
 mongoose.Promise = global.Promise;
 // stablish database
-mongoose.connect('mongodb://localhost/dashboard');
+mongoose.connect('mongodb://localhost/message_board');
 
 // Define Schema variable
 var Schema = mongoose.Schema;
@@ -35,7 +35,7 @@ var PostSchema = new mongoose.Schema({
    maxlength: 500,
    required : [true, 'post message']
  },
- comment: [{
+ _comment: [{
    type: Schema.Types.ObjectId,
    ref: 'Comment'}]
 }, {timestamps: true});
@@ -67,10 +67,10 @@ var Comment = mongoose.model('Comment');
 
 // Display posts and comments routes
 app.get('/', function(req, res){
-  Post.find({}).populate('comments').exec(function(err, posts){
+  Post.find({}).populate('_comment').exec(function(err, posts){
     Comment.find({}, function (err, comments){
       if (!err) {
-        res.render('index', {posts: posts, comments: comments});
+        res.render('index', {posts: posts});
         console.log("This is a post");
        }
        else {
@@ -100,31 +100,25 @@ app.post('/posts', function(req, res){
 
 
 // Post route for creating comment
-app.post('/comment/:id', function (req, res) {
-  Post.findOne({_id: req.params.id}, function (err, post) {
-    var comment = new Comment({name: req.body.c_name, comment: req.body.comment});
-    comment._post = post._id;
-    comment.save(function (err) {
-    if (!err) {
-      console.log(comment);
-      post.comments.push(comment)
-      post.save(function (err) {
-        if (!err) {
-          res.redirect('/');
-        }
-        else {
-          console.log('error');
-          res.redirect('/');
-        }
-      })
-    }
-    else {
-    console.log('comment error');
-    res.redirect('/');
-    }
-    })
-  });
-  console.log('comment posted')
+app.post("/comment/:id", function(req, res){
+	var post_id = req.params.id;
+	Post.findOne({_id: post_id}, function(err, post){
+		var newComment = new Comment({name: req.body.c_name, comment: req.body.comment});
+		newComment._post = post._id;
+    console.log(newComment);
+		Post.update({_id: post._id}, {$push: {"_comment": newComment}}, function(err){
+
+		});
+		newComment.save(function(err){
+			if(err){
+				console.log(err);
+				res.render('index', {errors: newComment.errors});
+			} else {
+				console.log("comment added");
+				res.redirect("/");
+			}
+		});
+	});
 });
 
 
