@@ -68,9 +68,10 @@ var Comment = mongoose.model('Comment');
 // Display posts and comments routes
 app.get('/', function(req, res){
   Post.find({}).populate('comments').exec(function(err, posts){
-    Comments.find({}, function (err, comments){
+    Comment.find({}, function (err, comments){
       if (!err) {
         res.render('index', {posts: posts, comments: comments});
+        console.log("This is a post");
        }
        else {
          res.render('index', {posts: false});
@@ -79,29 +80,7 @@ app.get('/', function(req, res){
    });
 });
 
-// post route for posts messages
-// app.post('/posts', function(req, res){
-//   var post = new Post({name: req.body.name, message: req.body.message});
-//   console.log(name, message);
-//   post.save(function (err) {
-//     if (!err) {
-//       console.log('posting message');
-//       res.redirect('/');
-//     }
-//     else {
-//       Post.find({}).populate('comments').exec(function (err, posts) {
-//         Comment.find({}, function (err, comments) {
-//           if (!err) {
-//             res.render('index', {posts: posts, comments: comments, errors: post.errors});
-//           }
-//           else {
-//             res.render('index', {posts: false});
-//           }
-//         });
-//       });
-//     }
-//   });
-// });
+//
 
 // Post Route for creating a Post
 app.post('/posts', function(req, res){
@@ -119,7 +98,35 @@ app.post('/posts', function(req, res){
   });
 });
 
-// Post route for creating a comment
+
+// Post route for creating comment
+app.post('/comment/:id', function (req, res) {
+  Post.findOne({_id: req.params.id}, function (err, post) {
+    var comment = new Comment({name: req.body.c_name, comment: req.body.comment});
+    comment._post = post._id;
+    comment.save(function (err) {
+    if (!err) {
+      console.log(comment);
+      post.comments.push(comment)
+      post.save(function (err) {
+        if (!err) {
+          res.redirect('/');
+        }
+        else {
+          console.log('error');
+          res.redirect('/');
+        }
+      })
+    }
+    else {
+    console.log('comment error');
+    res.redirect('/');
+    }
+    })
+  });
+  console.log('comment posted')
+});
+
 
 
 // listening in port 8000

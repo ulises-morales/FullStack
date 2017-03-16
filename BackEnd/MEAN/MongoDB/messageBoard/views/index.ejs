@@ -1,5 +1,6 @@
 <% include partials/header %>
 <div class="row">
+<h2>Make a Post</h2>
 <form class="" action="/posts" method="post">
   <div class="control-group col-md-4">
 		<label class="control-label" for="name">Name</label>
@@ -18,12 +19,45 @@
     <button class="btn btn-lg btn-success btn-block" type="submit">Post Message</button>
   </div>
 </form>
+</div>
 
-<div class="display_posts">
-  <% if (posts){%>
-    <% posts.forEach(function(post){)%>
-      <h4>Name: <%= post.name %></h4>
-      <h4>Message: <%= post.message %></h4>
-</div>
-</div>
+  <div class="row">
+    <div class="col-md-12">
+    <% if (posts){%>
+      <% for (let i = 0; i < posts.length; i++){%>
+        <h4>Name: <%= posts[i].name %></h4>
+        <h4>Message: <%= posts[i].message %></h4>
+        <% if (comments) {%>
+          <% for (let j = 0; j < posts[i].comments.length; j++){%>
+          <h6>Name: <%= posts[i].comments[j].name %></h6>
+          <p>Comment: <%= posts[i].comments[j].comment %></p>
+          <% }; %>
+        <% } %>
+          <div class="row">
+          <h3>Leave a comment</h3>
+          <form class="" action="/comment/<%= posts[i]._id%>" method="post">
+            <div class="control-group col-md-4">
+          		<label class="control-label" for="name">Name</label>
+          		<div class="controls">
+          			<input type="text" id="name" name="c_name" placeholder="" class="form-control input-lg">
+          		</div>
+          	</div>
+            <div class="control-group col-xs-6">
+              <label class="control-label" for="comment">Message</label>
+                <div class="controls">
+                  <textarea class="form-control" rows="3" name="comment"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group col-xs-2">
+              <button class="btn btn-primary btn-block" type="submit">Comment</button>
+            </div>
+          </form>
+          </div>
+        <hr>
+      <% } %>
+    <% } %>
+    </div>
+  </div>
+
 <% include partials/footer %>

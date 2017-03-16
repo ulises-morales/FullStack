@@ -92,7 +92,6 @@ app.get('/dogs/:id', function (req, res) {
         }
         else {
             console.log('no dogs');
-
             res.render('dogs',{dogs: false});
         }
     });
