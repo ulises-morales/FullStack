@@ -3,6 +3,7 @@ const express = require ("express"),
     app = express(),
     mongoose = require("mongoose"),
     Campground = require('./models/campground'),
+    Comment = require('./models/comment'),
     seedDB = require("./seeds");
 
 
@@ -27,7 +28,7 @@ app.get("/campgrounds", function(req, res){
     if(err){
       console.log(err);
     } else {
-      res.render("index", {campInfo: allCampgrounds});
+      res.render("campgrounds/index", {campInfo: allCampgrounds});
     }
   });
 });
@@ -52,7 +53,7 @@ app.post("/campgrounds", function(req, res){
 
 // shows form
 app.get("/campgrounds/new", function(req, res){
-  res.render("new.ejs");
+  res.render("campgrounds/new");
 });
 
 // shows info for specific campground
@@ -63,12 +64,50 @@ app.get("/campgrounds/:id", function(req, res){
       console.log("Did not find id");
     } else {
       // render show template with the campground
-      res.render("show", {campground: foundCampground});
+      res.render("campgrounds/show", {campground: foundCampground});
     }
   });
 });
 
 
+// =============================
+// COMMENTS ROUTES
+// =============================
+// display form for comments
+app.get('/campgrounds/:id/comments/new', function(req, res){
+  // find campground by id
+  Campground.findById(req.params.id, function(err, campground){
+    if(err){
+      console.log(err);
+    } else {
+        res.render('comments/new', {campground: campground});
+    }
+  })
+});
+
+// post route for comments route
+app.post('/campground/:id/comments', function(req, res){
+  // lookup campground using ID
+  Campground.findById(req.params.id, function(err, campground){
+    if(err){
+      console.log(err);
+      res.redirect('/campgrounds')
+    } else {
+      // create new comment
+      Comment.create(req.body.comment, function(err, comment){
+        if(err){
+          console.log(err);
+        } else {
+          // connect new comment to campground
+          campground.comments.push(comment);
+          campground.save();
+          // redirect to camground show page
+          res.redirect('/camground/'+ camground._id);
+        }
+      });
+    }
+  });
+});
 
 // Listening in port 80000
 app.listen(8000, function(){
