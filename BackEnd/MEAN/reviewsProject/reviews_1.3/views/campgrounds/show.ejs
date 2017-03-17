@@ -3,7 +3,7 @@
 <img src="<%= campground.image %>" alt="camp image">
 <p><%= campground.description %></p>
 <p>
-  <a class="btn btn-success" href="/camgrounds/<%= campground._id %>/comments/new">Add new comment</a>
+  <a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Add new comment</a>
 </p>
 <% campground.comments.forEach(function(comment){ %>
   <p><strong><%= comment.author %></strong> - <%= comment.text %></p>

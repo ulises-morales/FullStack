@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(require("express-session")({
   secret: "This is the secret key",
   resave: false,
-  saveUnitialized: false,
+  saveUninitialized: false,
 }));
 
 // set ejs
