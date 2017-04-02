@@ -1,0 +1,35 @@
+<div ng-controller="questionsController">
+  <div class="row">
+    <nav>
+      <div class="col-xs-5">
+        <a href="#!/">Home</a>
+      </div>
+      <div class="col-xs-5">
+        <a href="#!/logout">Logout</a>
+      </div>
+    </nav>
+  </div>
+  <div class="row">
+    <h1>New Question</h1>
+    <h3>{{errors.new_question.message}}</h1>
+  </div>
+  <div class="col-xs-8">
+    <span class="warning" ng-bind='warning'></span>
+    <form ng-submit='createQuestion()'>
+      <div class="form-group">
+        <label>Question</label>
+        <textarea ng-model="question.question" rows="6" cols="80" placeholder="Type a question"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Description (optional)</label>
+        <textarea ng-model="question.description" rows="6" cols="80" placeholder="Type a description"></textarea>
+      </div>
+      <div class="form-group">
+        <a href="#!/dashboard">Cancel</a>
+        <!-- <button>Cancel</button> -->
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+</div>

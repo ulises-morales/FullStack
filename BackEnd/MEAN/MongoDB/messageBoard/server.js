@@ -19,7 +19,7 @@ var mongoose = require('mongoose');
 // Use native promises
 mongoose.Promise = global.Promise;
 // stablish database
-mongoose.connect('mongodb://localhost/message_board');
+mongoose.connect('mongodb://localhost/message_board_1');
 
 // Define Schema variable
 var Schema = mongoose.Schema;

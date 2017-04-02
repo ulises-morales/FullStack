@@ -1,0 +1,34 @@
+<div ng-controller="answersController">
+  <nav>
+    <a href="#!/dashboard">Home</a>
+    <span>|</span>
+    <a href="#!/question/{{question._id}}">Go Back To Question</a>
+    <span>|</span>
+    <a href="#!/logout">Logout</a>
+  </nav>
+
+  <div class="row">
+    <h1 ng-bind="question.question"></h1>
+    <h3 ng-bind="question.description"></h3>
+  </div>
+
+  <div class="col-xs-8">
+    <span class="warning" ng-bind='warning'></span>
+    <form ng-submit="answerQuestion()">
+      <div class="form-group">
+        <label>Answer</label>
+        <textarea ng-model="answer.answer" rows="6" cols="80" placeholder="Type an answer"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Supporting details for your answer (optional)</label>
+        <textarea ng-model="answer.details" rows="6" cols="80" placeholder="Type a details of your answer"></textarea>
+      </div>
+      <div class="form-group">
+        <a href="#!/question/{{question._id}}">Cancel</a>
+        <!-- <button>Cancel</button> -->
+        <button>Submit</button>
+      </div>
+    </form>
+  </div>
+
+</div>

@@ -1,0 +1,42 @@
+<div ng-controller="oneQuestionController">
+  <nav>
+    <a href="#!/dashboard">Home</a>
+    <span>|</span>
+    <a href="#!/question/{{question._id}}/answer">Answer this Question</a>
+    <span>|</span>
+    <a href="#!/logout">Logout</a>
+  </nav>
+  <div class="title">
+    <h5>Hey {{currentUser.name}} here are the asnwers for the question:</h5>
+    <h1 ng-bind="question.question"></h1>
+    <h3 ng-bind="question.description"></h3>
+  </div>
+
+
+  <!-- <div ng-show="answers">
+    <p>this are your answer</p>
+  </div> -->
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Answer</th>
+        <th>Details</th>
+        <th>Likes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="answer in answers">
+        <td ng-bind="answer._user.name"></td>
+        <td ng-bind="answer.answer"></td>
+        <td ng-bind="answer.details"></td>
+        <td>
+          <form ng-submit="like($index)">{{answer.likes}} likes
+            <button>Like</button>
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
