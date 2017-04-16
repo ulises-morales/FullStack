@@ -1,0 +1,40 @@
+<div class="container">
+  <h1>Hi <%= @user.name %>!</h1>
+
+  <span><%= link_to "Edit Profile", edit_user_path(@user) %></span>
+  <span>|</span> 
+  <span><a href="/secrets">All Secrets</a></span> 
+
+  <hr>
+
+  <form class="form-horizontal" action = "/secrets" method = "post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+    <div class="form-group">
+      <div class="col-sm-6">
+        <input type="text" name = "secret[content]" placeholder="Type your secret">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="col-sm-2">
+        <input class="btn btn-success" type="submit" value = "Create Secret">
+      </div>
+    </div> 
+    
+  </form>
+
+  <hr>
+
+  <% @user.secrets.each do |secret| %>
+    <h3><%= secret.content %></h3>
+    <h5><%= secret.likes.count %> likes</h5>  
+    <% if secret.user == current_user %>
+      <form action = "/secrets/<%= secret.id %>" method = "post">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="hidden" name="_method" value="delete">
+        <input class="btn btn-danger" type = 'submit' value = 'Delete Secret'>
+      </form>
+    <% end %>
+  <% end %>
+</div>
